@@ -1,0 +1,354 @@
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix dbo: <http://dbpedia.org/ontology/> .
+@prefix dbp: <http://dbpedia.org/property/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix tto: <http://example.org/tuto/ontology#> .
+@prefix ttr: <http://example.org/tuto/resource#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix dbpedia: <http://dbpedia.org/resource/> .
+@base <http://www.w3.org/2002/07/owl#> .
+
+[ rdf:type owl:Ontology ;
+   cc:licence "https://creativecommons.org/licenses/by-sa/4.0/" ;
+   rdfs:comment "Essa ontologia está sendo usada para atender as atividades solicitadas na  aula do dia 07-10-2021"@pt ;
+   owl:versionInfo "3.0"@pt
+ ] .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://creativecommons.org/ns#licence
+cc:licence rdf:type owl:AnnotationProperty .
+
+
+###  http://dbpedia.org/ontology/parent
+dbo:parent rdf:type owl:AnnotationProperty .
+
+
+###  http://dbpedia.org/property/birthDate
+dbp:birthDate rdf:type owl:AnnotationProperty .
+
+
+###  http://dbpedia.org/property/name
+dbp:name rdf:type owl:AnnotationProperty .
+
+
+###  http://dbpedia.org/resource/Instituto_Federal_do_Espírito_Santo
+dbpedia:Instituto_Federal_do_Espírito_Santo rdf:type owl:AnnotationProperty .
+
+
+###  http://dbpedia.org/resource/Universidade_Federal_do_Espírito_Santo
+dbpedia:Universidade_Federal_do_Espírito_Santo rdf:type owl:AnnotationProperty .
+
+
+###  http://schema.org/location
+schema:location rdf:type owl:AnnotationProperty .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#schema
+<http://www.co-ode.org/ontologies/ont.owl#schema> rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/1999/02/22-rdf-syntax-ns#type
+rdf:type rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2002/07/owl#equivalenteClass
+owl:equivalenteClass rdf:type owl:AnnotationProperty .
+
+
+###  http://xmlns.com/foaf/0.1/homepage
+foaf:homepage rdf:type owl:AnnotationProperty .
+
+
+###  http://xmlns.com/foaf/0.1/weblog
+foaf:weblog rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://www.w3.org/2001/XMLSchema#date
+xsd:date rdf:type rdfs:Datatype .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://example.org/tuto/ontology#temAnimalDomestico
+tto:temAnimalDomestico rdf:type owl:ObjectProperty ,
+                                owl:AsymmetricProperty ,
+                                owl:IrreflexiveProperty ;
+                       rdfs:domain tto:Pessoa ;
+                       rdfs:range tto:Animal ;
+                       rdfs:isDefinedBy tto: ;
+                       rdfs:label "tem animal doméstico"@pt .
+
+
+###  http://example.org/tuto/ontology#temConvenioEducacional
+tto:temConvenioEducacional rdf:type owl:ObjectProperty ,
+                                    owl:SymmetricProperty ,
+                                    owl:TransitiveProperty ,
+                                    owl:IrreflexiveProperty ;
+                           rdfs:domain tto:Instituicoes ;
+                           rdfs:isDefinedBy tto: ;
+                           rdfs:label "tem convênio educacional"@pt .
+
+
+###  http://example.org/tuto/ontology#trabalhaNainstituicao
+tto:trabalhaNainstituicao rdf:type owl:ObjectProperty ,
+                                   owl:TransitiveProperty ,
+                                   owl:IrreflexiveProperty ;
+                          rdfs:domain tto:Instituicoes ;
+                          rdfs:isDefinedBy tto: ;
+                          rdfs:label "trabalha na instituição"@pt .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://example.org/tuto/ontology#estaEmZona
+tto:estaEmZona rdf:type owl:DatatypeProperty ,
+                        owl:FunctionalProperty ;
+               rdfs:domain tto:Instituicoes ;
+               rdfs:range xsd:string ;
+               rdfs:comment "rural ou urbana"@pt ;
+               rdfs:isDefinedBy tto: ;
+               rdfs:label "está em zona"@pt .
+
+
+###  http://example.org/tuto/ontology#temCor
+tto:temCor rdf:type owl:DatatypeProperty ;
+           rdfs:domain tto:Animal ;
+           rdfs:range xsd:string ;
+           rdfs:isDefinedBy tto: ;
+           rdfs:label "tem cor"@pt .
+
+
+###  http://example.org/tuto/ontology#temPeso
+tto:temPeso rdf:type owl:DatatypeProperty ,
+                     owl:FunctionalProperty ;
+            rdfs:domain tto:Criatura ;
+            rdfs:range xsd:decimal ;
+            rdfs:comment "weight in kilograms" ;
+            rdfs:isDefinedBy tto: ;
+            rdfs:label "tem peso"@pt .
+
+
+###  http://example.org/tuto/ontology#temSexo
+tto:temSexo rdf:type owl:DatatypeProperty ,
+                     owl:FunctionalProperty ;
+            rdfs:domain tto:Criatura ;
+            rdfs:range xsd:string ;
+            rdfs:isDefinedBy tto: ;
+            rdfs:label "tem sexo"@pt .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://example.org/tuto/ontology#Animal
+tto:Animal rdf:type owl:Class ;
+           rdfs:subClassOf tto:Pessoa ;
+           rdfs:isDefinedBy tto: ;
+           rdfs:label "Animal"@pt .
+
+
+###  http://example.org/tuto/ontology#Cachorro
+tto:Cachorro rdf:type owl:Class ;
+             rdfs:subClassOf tto:Animal ;
+             rdfs:isDefinedBy tto: ;
+             rdfs:label "Cachorro"@pt .
+
+
+###  http://example.org/tuto/ontology#Criatura
+tto:Criatura rdf:type owl:Class ;
+             rdfs:isDefinedBy tto: ;
+             rdfs:label "Criatura"@pt .
+
+
+###  http://example.org/tuto/ontology#Gato
+tto:Gato rdf:type owl:Class ;
+         rdfs:subClassOf tto:Animal ;
+         rdfs:isDefinedBy tto: ;
+         rdfs:label "Gato"@pt .
+
+
+###  http://example.org/tuto/ontology#InstituicaoEducacional
+tto:InstituicaoEducacional rdf:type owl:Class ;
+                           rdfs:subClassOf tto:Instituicoes ;
+                           rdf:type <http://schema.org//EducationalOrganization> ;
+                           rdfs:isDefinedBy tto: ;
+                           rdfs:label "Instituição Educacional"@pt ;
+                           owl:equivalenteClass dbpedia:Educational_institution .
+
+
+###  http://example.org/tuto/ontology#InstituicaoFinanceira
+tto:InstituicaoFinanceira rdf:type owl:Class ;
+                          rdfs:subClassOf tto:Instituicoes ;
+                          rdfs:isDefinedBy dbo:FinancialInstitution ;
+                          rdfs:label "Instituição Financeira"@pt .
+
+
+###  http://example.org/tuto/ontology#Instituicoes
+tto:Instituicoes rdf:type owl:Class ;
+                 rdfs:isDefinedBy tto: ;
+                 rdfs:label "Instituicoes"@pt .
+
+
+###  http://example.org/tuto/ontology#Macaco
+tto:Macaco rdf:type owl:Class ;
+           rdfs:subClassOf tto:Animal ;
+           rdfs:isDefinedBy tto: ;
+           rdfs:label "Macaco"@pt .
+
+
+###  http://example.org/tuto/ontology#Pessoa
+tto:Pessoa rdf:type owl:Class ;
+           rdfs:subClassOf tto:Criatura ;
+           owl:equivalenteClass dbo:Person .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://dbpedia.org/ontology/Instituto_Federal_do_Espírito_Santo
+dbo:Instituto_Federal_do_Espírito_Santo rdf:type owl:NamedIndividual ;
+                                        owl:sameAs ttr:Ifes ;
+                                        dbpedia:Instituto_Federal_do_Espírito_Santo dbpedia:Espírito_Santo ;
+                                        owl:equivalenteClass dbpedia:Educational_institution .
+
+
+###  http://dbpedia.org/ontology/Universidade_Federal_do_Espírito_Santo
+dbo:Universidade_Federal_do_Espírito_Santo rdf:type owl:NamedIndividual ;
+                                           owl:sameAs ttr:Ufes ;
+                                           dbpedia:Universidade_Federal_do_Espírito_Santo dbpedia:Espírito_Santo ;
+                                           owl:equivalenteClass dbpedia:Educational_institution .
+
+
+###  http://example.org/tuto/resource#Eve
+ttr:Eve rdf:type owl:NamedIndividual ,
+                 tto:Pessoa ;
+        tto:temAnimalDomestico ttr:Snuff ;
+        tto:temPeso 20.0 ;
+        tto:temSexo "female" ;
+        dbo:parent ttr:William ;
+        dbp:birthDate "2006-11-03"^^xsd:date ;
+        dbp:name "Eve" .
+
+
+###  http://example.org/tuto/resource#Ifes
+ttr:Ifes rdf:type owl:NamedIndividual ,
+                  tto:InstituicaoEducacional ;
+         tto:temConvenioEducacional ttr:Ufes ;
+         tto:estaEmZona "rural"@pt ;
+         schema:location dbpedia:Espírito_Santo ,
+                         <http://dbpedia.org/resource/Vitória,_Espírito_Santo> ;
+         rdfs:label "Ifes"@pt ;
+         foaf:homepage <https://www.ifes.edu.br/> .
+
+
+###  http://example.org/tuto/resource#John
+ttr:John rdf:type owl:NamedIndividual ,
+                  tto:Pessoa ;
+         tto:temAnimalDomestico ttr:Luna ,
+                                ttr:Tom ;
+         tto:trabalhaNainstituicao ttr:Ufes ;
+         tto:temPeso 85.0 ;
+         tto:temSexo "male" ;
+         dbp:birthDate "1942-02-02"^^xsd:date ;
+         dbp:name "John" .
+
+
+###  http://example.org/tuto/resource#Luna
+ttr:Luna rdf:type owl:NamedIndividual ,
+                  tto:Gato ;
+         tto:temCor "violet" ;
+         tto:temPeso 5.1 ;
+         tto:temSexo "female" ;
+         dbp:name "Luna" .
+
+
+###  http://example.org/tuto/resource#Pingo
+ttr:Pingo rdf:type owl:NamedIndividual ,
+                   tto:Cachorro ;
+          tto:temCor "branco" ,
+                     "marrom" ;
+          tto:temPeso "5" ;
+          tto:temSexo "male" ;
+          dbp:name "Pingo" .
+
+
+###  http://example.org/tuto/resource#Rex
+ttr:Rex rdf:type owl:NamedIndividual ,
+                 tto:Cachorro ;
+        tto:temCor "brown" ;
+        tto:temPeso 8.8 ;
+        tto:temSexo "male" ;
+        dbp:name "Rex" .
+
+
+###  http://example.org/tuto/resource#Snuff
+ttr:Snuff rdf:type owl:NamedIndividual ,
+                   tto:Macaco ;
+          tto:temCor "golden" ;
+          tto:temPeso 3.6 ;
+          tto:temSexo "male" ;
+          dbp:name "Snuff" .
+
+
+###  http://example.org/tuto/resource#Tom
+ttr:Tom rdf:type owl:NamedIndividual ,
+                 tto:Gato ;
+        tto:temCor "grey" ;
+        tto:temPeso 5.8 ;
+        tto:temSexo "male" ;
+        dbp:name "Tom" .
+
+
+###  http://example.org/tuto/resource#Ufes
+ttr:Ufes rdf:type owl:NamedIndividual ,
+                  tto:InstituicaoEducacional ;
+         tto:temConvenioEducacional ttr:Ifes ;
+         tto:estaEmZona "urbana"@pt ;
+         schema:location dbpedia:Espírito_Santo ,
+                         <http://dbpedia.org/resource/Vitória,_Espírito_Santo> ;
+         rdfs:label "Ufes"@pt ;
+         foaf:homepage <https://www.ufes.br/> .
+
+
+###  http://example.org/tuto/resource#William
+ttr:William rdf:type owl:NamedIndividual ,
+                     tto:Pessoa ;
+            tto:temAnimalDomestico ttr:Rex ;
+            tto:trabalhaNainstituicao ttr:Ufes ;
+            tto:temPeso 75.0 ;
+            tto:temSexo "male" ;
+            dbo:parent ttr:John ;
+            dbp:birthDate "1978-07-20"^^xsd:date ;
+            dbp:name "William" .
+
+
+###  http://example.org/tuto/resource#Zeca
+ttr:Zeca rdf:type owl:NamedIndividual ,
+                  tto:Pessoa ;
+         tto:temAnimalDomestico ttr:Pingo ;
+         tto:trabalhaNainstituicao ttr:Ufes ;
+         tto:temPeso "80" ;
+         dbo:parent "John" ;
+         dbp:birthDate "1970-12-05" ;
+         dbp:name "Zeca" .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
